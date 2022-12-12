@@ -16,7 +16,7 @@ export const getCityWeather = createAsyncThunk('/getCityWeather', async (inputCi
 
         let url = `https://api.openweathermap.org/data/2.5/weather?units=metric&q=${queryString}&appid=f473cb3c4a2865e315ac74ebbd07ab80`
         const {data, status} = await axios.get(url)
-        console.log(status)
+        console.log(data)
 
 
         return data

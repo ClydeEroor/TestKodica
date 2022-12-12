@@ -3,9 +3,8 @@ import './App.css';
 import {useDispatch, useSelector} from 'react-redux'
 import {getCityWeather} from "./redux/features/weatherSlice";
 import CityCards from "./components/CityCards";
-import {Simulate} from "react-dom/test-utils";
-import change = Simulate.change;
-// import {Reorder} from "framer-motion";
+
+
 
 
 export const App = () => {
@@ -36,16 +35,15 @@ export const App = () => {
         setOpenData(true)
         setCities([...cities, weather])
         setInputCityQuery('')
-        console.log(inputCityQuery)
     }
 
 
+        //выключили интернет
 
-
-    useEffect(() => {
+        useEffect(() => {
         // @ts-ignore
         dispatch(getCityWeather(inputCityQuery))
-    }, [dispatch, inputCityQuery]);
+    }, [inputCityQuery,dispatch,getCityWeather]);
 
 
     return (
@@ -57,6 +55,7 @@ export const App = () => {
                        placeholder="Введите название города" onChange={handleChange}
                        onKeyDown={handleKeyDown}
                        type="text"/>
+
                 <div className='relative right-24'>
                     <button
                         className="rounded-full flex items-center justify-center w-24 h-[40px] text-[14px] text-black bg-cyan-400 hover:text-cyan-400 hover:bg-white absolute"

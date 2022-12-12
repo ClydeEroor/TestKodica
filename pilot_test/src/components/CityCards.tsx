@@ -1,4 +1,7 @@
 import React from 'react'
+// import { ToastContainer} from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import importImg from "../img/ImportImg";
 
 
 
@@ -8,13 +11,14 @@ import React from 'react'
 //     wind: any,
 // }
 
-
 const CityCards = ({data}: { data: any }) => {
     // const weatherIcon = () => {
     //     if (data) {
     //
     //     }
     // }
+
+
 
     return (
         <div>
@@ -29,9 +33,8 @@ const CityCards = ({data}: { data: any }) => {
                             <div className="temperature text-xl text-fuchsia-50">
                                 <h2>{data?.main?.temp?.toFixed()} ℃</h2>
                             </div>
-                            <div>
-
-                            </div>
+                                {/*// @ts-ignore*/}
+                            <importImg weatherDescription={data?.weather.id} />
                         </div>
                         <div className="detail_information flex flex-col items-center">
                             <div className="Max_temp">
@@ -53,7 +56,7 @@ const CityCards = ({data}: { data: any }) => {
                         <button className="bg-white rounded-tl-full mb-0  rounded-tr-full ">Update</button>
                     </div>
                 </div>
-            </div> : "Введите Правильный город"}
+            </div> : "введите данные"}
         </div>
     );
 };
