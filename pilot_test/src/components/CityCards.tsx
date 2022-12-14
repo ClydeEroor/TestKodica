@@ -1,7 +1,7 @@
 import React from 'react'
 // import { ToastContainer} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import importImg from "../img/ImportImg";
+// import importImg from "./ImportImg";
 
 
 
@@ -34,7 +34,7 @@ const CityCards = ({data}: { data: any }) => {
                                 <h2>{data?.main?.temp?.toFixed()} ℃</h2>
                             </div>
                                 {/*// @ts-ignore*/}
-                            <importImg weatherDescription={data?.weather.id} />
+                            {/*<importImg weatherDescription={data?.weather.id} />*/}
                         </div>
                         <div className="detail_information flex flex-col items-center">
                             <div className="Max_temp">
