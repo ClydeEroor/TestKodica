@@ -11,10 +11,6 @@ import {
 } from 'redux-persist'
 import storage from 'redux-persist/lib/storage'
 import {CityWeather} from "./features/weatherSlice";
-
-
-
-
 // if you have more 1 reducer add it in to the RootReducer
 // const rootReducer = {
 //     weather: CityWeather.reducer,

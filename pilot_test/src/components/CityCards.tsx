@@ -23,7 +23,7 @@ const CityCards =  ({data}: { data: any }) => {
                                 <h2>{data?.main?.temp?.toFixed()} ℃</h2>
                             </div>
                             {/*// @ts-ignore*/}
-                            <div>  <ImportImg weatherDescription={data?.weather[0].icon} key={}/></div>
+                            <div>  <ImportImg weatherDescription={data?.weather[0].icon}/></div>
 
                                 {/*// @ts-ignore*/}
                             {/*<importImg weatherDescription={data?.weather.id} />*/}
