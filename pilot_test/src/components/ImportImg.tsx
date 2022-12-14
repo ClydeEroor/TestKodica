@@ -1,9 +1,8 @@
 import React from 'react';
 
-{/*<importImg weatherDescription={data?.weather.id} />*/
-}
+{/*<importImg weatherDescription={data?.weather.id} />*/}
 {/*    /!*@ts-ignore*!/*/}
-const ImportImg = (weatherDescription: string) => {
+const ImportImg = ({weatherDescription}: { weatherDescription: any }) => {
 
         const weatheImg = [
             {id: "01d", src: "http://openweathermap.org/img/wn/01d@2x.png"},
@@ -27,18 +26,16 @@ const ImportImg = (weatherDescription: string) => {
         ]
         //ts-ignore
         const selectWeather = () => {
-            weatheImg.map((elem) => {
+            return weatheImg.map((elem) => {
                 if (elem.id === weatherDescription) {
-                    return <img src={elem.src} alt="tes"/>
+                    return <img src={elem.src}  alt={elem.id}/>
                 }
             })
         }
 
-
-
     return (
             <div>
-                {/*{selectWeather}*/}
+                {selectWeather()}
             </div>
         );
 

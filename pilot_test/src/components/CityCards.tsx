@@ -1,28 +1,17 @@
 import React from 'react'
 // import { ToastContainer} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-// import importImg from "./ImportImg";
+import ImportImg from "./ImportImg";
 
 
 
-// export type WeatherData = {
-//     name: string,
-//     main: any,
-//     wind: any,
-// }
 
-const CityCards = ({data}: { data: any }) => {
-    // const weatherIcon = () => {
-    //     if (data) {
-    //
-    //     }
-    // }
-
+const CityCards =  ({data}: { data: any }) => {
 
 
     return (
         <div>
-            {data ? <div
+            { data ? <div
                 className="px-12 my-4 bg-opacity-50 bg-gray-700 min-w-full min-w-[200] rounded-3xl border-orange-200 border-4">
                 <div className="CityCards flex flex-row relative pt-2 min-h-[200px]">
                     <div className="weather flex flex-col justify-between relative">
@@ -33,6 +22,9 @@ const CityCards = ({data}: { data: any }) => {
                             <div className="temperature text-xl text-fuchsia-50">
                                 <h2>{data?.main?.temp?.toFixed()} ℃</h2>
                             </div>
+                            {/*// @ts-ignore*/}
+                            <div>  <ImportImg weatherDescription={data?.weather[0].icon} key={}/></div>
+
                                 {/*// @ts-ignore*/}
                             {/*<importImg weatherDescription={data?.weather.id} />*/}
                         </div>

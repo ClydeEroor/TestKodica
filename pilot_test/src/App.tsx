@@ -1,25 +1,21 @@
-import React, {useEffect, useState} from 'react';
+import React, {useState} from 'react';
 import './App.css';
 import {useDispatch, useSelector} from 'react-redux'
 import {getCityWeather} from "./redux/features/weatherSlice";
 import CityCards from "./components/CityCards";
 
 
-
-
 export const App = () => {
     const dispatch = useDispatch<any>()
-
     // @ts-ignore
-    const {weather} = useSelector((state) => state.weather)
+    const weather = useSelector((state) => state.weather)
     const [openData, setOpenData] = useState(false)
     const [inputCityQuery, setInputCityQuery] = useState('')
     const [cities, setCities] = useState<Array<any>>([])
     //Вставить cityes в редакс
     //Redux with Local Storage
-
-
     // @ts-ignore
+
 
     const handleChange = (event: { target: { value: React.SetStateAction<string>; }; }) => {
         setInputCityQuery(event.target.value)
@@ -30,22 +26,25 @@ export const App = () => {
             handleData()
         }
     }
+    console.log(weather)
 
     const handleData = () => {
         setOpenData(true)
-        setCities([...cities, weather])
-        setInputCityQuery('')
-    }
+        console.log(cities)
+
+        // weather[..., dasdasd]
 
 
-        //выключили интернет
-
-        useEffect(() => {
+        setCities([...cities, inputCityQuery])
+        console.log(cities)
         // @ts-ignore
         dispatch(getCityWeather(inputCityQuery))
-    }, [inputCityQuery,dispatch,getCityWeather]);
-
-
+        // @ts-ignore
+        // dispatch(localCityes(cities))
+        // setInputCityQuery('')
+    }
+    //выключили интернет
+    // @ts-ignore
     return (
         <div className="w-full justify-center app">
             <div className="city-input flex justify-center w-full px-2 py-5">
@@ -65,7 +64,8 @@ export const App = () => {
                 </div>
             </div>
             <div className="container flex-wrap flex flex-row justify-around ">
-                {openData ? cities.map((elem) => <CityCards key={elem} data={elem}/>) : null}
+                {/*// @ts-ignore*/}
+                {weather.map((elem) => <CityCards key={elem.id} data={elem}/>)}
             </div>
         </div>
     );
