@@ -5,7 +5,7 @@ const initialState = {
     weather: [],
     error: "",
 }
-//https://api.openweathermap.org/data/2.5/forecast?id=524901&q=Kyiv&units=metric&appid=f473cb3c4a2865e315ac74ebbd07ab80
+//https://api.openweathermap.org/data/2.5/forecast?id=524901&q=Kyiv&units=metric&appid=f473cb3c4a2865e315ac74ebbd07ab80 asd
 
 export const getCityWeather = createAsyncThunk('/getCityWeather', async (inputCityQuery) => {
     try {
