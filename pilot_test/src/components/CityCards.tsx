@@ -1,51 +1,55 @@
 import React from 'react'
-// import { ToastContainer} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import ImportImg from "./ImportImg";
+import {deleteCity} from '../redux/features/weatherSlice'
+import {useDispatch} from "react-redux";
 
 
+const CityCards = ({data}: { data: any }) => {
 
-
-const CityCards =  ({data}: { data: any }) => {
-
+    const dispatch = useDispatch<any>()
+    const deleteHandler = () => {
+        dispatch(deleteCity({id: data.id}))
+    }
 
     return (
         <div>
-            { data ? <div
-                className="px-12 my-4 bg-opacity-50 bg-gray-700 min-w-full min-w-[200] rounded-3xl border-orange-200 border-4">
-                <div className="CityCards flex flex-row relative pt-2 min-h-[200px]">
-                    <div className="weather flex flex-col justify-between relative">
-                        <div className="General_information flex flex-row justify-center items-center">
-                            <div className="City pr-2">
-                                <h1 className="text-2xl">{data?.name}</h1>
-                            </div>
-                            <div className="temperature text-xl text-fuchsia-50">
-                                <h2>{data?.main?.temp?.toFixed()} ℃</h2>
-                            </div>
-                            {/*// @ts-ignore*/}
-                            <div>  <ImportImg weatherDescription={data?.weather[0].icon}/></div>
-
+            {data ? <div
+                className="my-4  bg-cyan-900 min-w-full min-w-[200] rounded-3xl border-orange-200 border-4 ">
+                <div className="CityCards flex flex-row relative min-h-[200px]">
+                    <div className="weather flex flex-col justify-between">
+                        <div className="flex bg-fuchsia-200 rounded-[20px] z-20  card  flex-row justify-center items-center">
+                            <div>
                                 {/*// @ts-ignore*/}
-                            {/*<importImg weatherDescription={data?.weather.id} />*/}
+                                <div><img className="max-w-[80px]" src={`https://openweathermap.org/img/wn/${data?.weather[0].icon}@2x.png`}
+                                          alt={data.id}/></div>
+                            </div>
+                            <div className="City pr-5">
+                                <h1 className="text-2xl">{data?.name}</h1>
+
+                                <h2 className="text-white">{data?.main?.temp?.toFixed()} ℃</h2>
+                            </div>
                         </div>
-                        <div className="detail_information flex flex-col items-center">
-                            <div className="Max_temp">
+                        <div className="mt-4 flex flex-col items-center text-white">
+                            <div className="py-1">
                                 <p>Feels like: {data?.main.feels_like.toFixed()}℃</p>
                             </div>
-                            <div className="Max_temp">
+                            <div className="py-1">
                                 <p>Max: {data?.main.temp_max.toFixed()}℃ </p>
                             </div>
-                            <div className="Min_temp">
+                            <div className="py-1">
                                 <p>Min: {data?.main.temp_min.toFixed()}℃</p>
                             </div>
-                            <div className="humidity">
+                            <div className="py-1">
                                 <h3>Humidity: {data?.main.humidity}%</h3>
                             </div>
-                            <div className="wind">
+                            <div className="py-1">
                                 <h3>Wind: {data?.wind.speed.toFixed()}М/с </h3>
                             </div>
                         </div>
-                        <button className="bg-white rounded-tl-full mb-0  rounded-tr-full ">Update</button>
+                        <div className="flex flex-row mt-4 justify-around">
+                            <button onClick={deleteHandler} className="bg-white mb-0 ">Delete</button>
+                            <button className="bg-white mb-0  ">Update</button>
+                        </div>
                     </div>
                 </div>
             </div> : "введите данные"}

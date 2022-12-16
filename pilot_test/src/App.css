@@ -7,13 +7,20 @@
     font-family: 'Outfit', sans-serif;
 
 }
-
-.app {
-    background: url("../public/background.jpeg") no-repeat center center/cover;
+body {
+    position: relative;
+}
+.app {;
+    top: 0;
+    background: url("../public/background.jpeg") no-repeat center right/cover;
     height: 100vh;
 }
+
 .container {
     margin: 0 auto;
+}
+.card {
+    background-color: coral;
 }
 
 

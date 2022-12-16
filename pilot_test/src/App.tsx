@@ -9,12 +9,10 @@ export const App = () => {
     const dispatch = useDispatch<any>()
     // @ts-ignore
     const weather = useSelector((state) => state.weather)
-    const [openData, setOpenData] = useState(false)
-    const [inputCityQuery, setInputCityQuery] = useState('')
-    const [cities, setCities] = useState<Array<any>>([])
-    //Вставить cityes в редакс
-    //Redux with Local Storage
     // @ts-ignore
+    const inValidCity = useSelector((state) => state.error)
+    const [inputCityQuery, setInputCityQuery] = useState('')
+
 
 
     const handleChange = (event: { target: { value: React.SetStateAction<string>; }; }) => {
@@ -27,23 +25,12 @@ export const App = () => {
         }
     }
     console.log(weather)
-
     const handleData = () => {
-        setOpenData(true)
-        console.log(cities)
-
-        // weather[..., dasdasd]
-
-
-        setCities([...cities, inputCityQuery])
-        console.log(cities)
         // @ts-ignore
         dispatch(getCityWeather(inputCityQuery))
-        // @ts-ignore
-        // dispatch(localCityes(cities))
-        // setInputCityQuery('')
     }
-    //выключили интернет
+
+
     // @ts-ignore
     return (
         <div className="w-full justify-center app">
@@ -62,10 +49,11 @@ export const App = () => {
                         type="submit">add
                     </button>
                 </div>
+                <p>{inValidCity}</p>
             </div>
             <div className="container flex-wrap flex flex-row justify-around ">
                 {/*// @ts-ignore*/}
-                {weather.map((elem) => <CityCards key={elem.id} data={elem}/>)}
+                {weather?.map((elem) => <CityCards key={elem.id} data={elem}/>)}
             </div>
         </div>
     );

@@ -1,8 +1,9 @@
-import {createSlice, createAsyncThunk} from '@reduxjs/toolkit'
+import {createAsyncThunk, createSlice} from '@reduxjs/toolkit'
 import axios from "axios";
 
 const initialState = {
     weather: [],
+    error:"",
 }
 //https://api.openweathermap.org/data/2.5/forecast?id=524901&q=Kyiv&units=metric&appid=f473cb3c4a2865e315ac74ebbd07ab80
 
@@ -16,18 +17,22 @@ export const getCityWeather = createAsyncThunk('/getCityWeather', async (inputCi
 
         let url = `https://api.openweathermap.org/data/2.5/weather?units=metric&q=${queryString}&appid=f473cb3c4a2865e315ac74ebbd07ab80`
         const {data} = await axios.get(url)
-        console.log(data)
         return data
     } catch (error) {
-        console.log(error)
+        throw error.response.data
     }
 })
+
 
 // @ts-ignore
 export const CityWeather = createSlice({
         name: 'weather',
         initialState,
-        reducers: {},
+        reducers: {
+            deleteCity: (state,action) => {
+                state.weather = state.weather.filter(elem => elem.id !== action.payload.id)
+            }
+        },
         extraReducers: {
             [getCityWeather.pending]: (state) => {
                 state.loading = true
@@ -35,13 +40,13 @@ export const CityWeather = createSlice({
             [getCityWeather.fulfilled]: (state, action) => {
                 state.loading = false
                 state.weather = [...state.weather,action.payload]
+                state.error = ''
             },
-            [getCityWeather.rejected]: (state) => {
+            [getCityWeather.rejected]: (state,action) => {
                 state.loading = false
-
+                state.error = action.error.message
             },
         }
     }
 )
-// @ts-ignore
-// @ts-ignore
+export const { deleteCity } = CityWeather.actions
