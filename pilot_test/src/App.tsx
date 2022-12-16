@@ -15,6 +15,7 @@ export const App = () => {
 
 
 
+
     const handleChange = (event: { target: { value: React.SetStateAction<string>; }; }) => {
         setInputCityQuery(event.target.value)
     }
@@ -29,12 +30,13 @@ export const App = () => {
         // @ts-ignore
         dispatch(getCityWeather(inputCityQuery))
     }
+    // Написать функцию которая передает айди карточки из weather текущей который нужно передать как квери параметр в базу чтобы получить новые данные этой карточки
 
 
     // @ts-ignore
     return (
         <div className="w-full justify-center app">
-            <div className="city-input flex justify-center w-full px-2 py-5">
+            <div className="city-input flex justify-center w-full px-2 pt-20">
                 <input className="rounded-3xl px-4 h-[40px] border-amber-200 border-2 bg-gray-900
                  text-white w-[400px] "
                     // @ts-ignore
@@ -49,8 +51,9 @@ export const App = () => {
                         type="submit">add
                     </button>
                 </div>
-                <p>{inValidCity}</p>
+
             </div>
+            <div className="flex justify-center text-red-500 my-8"><p>{inValidCity ? inValidCity.toUpperCase() + `, Try again` : ''}</p></div>
             <div className="container flex-wrap flex flex-row justify-around ">
                 {/*// @ts-ignore*/}
                 {weather?.map((elem) => <CityCards key={elem.id} data={elem}/>)}

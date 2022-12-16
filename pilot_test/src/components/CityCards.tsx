@@ -1,20 +1,25 @@
 import React from 'react'
 import 'react-toastify/dist/ReactToastify.css';
-import {deleteCity} from '../redux/features/weatherSlice'
+import {deleteCity,  updateCityCard} from '../redux/features/weatherSlice'
 import {useDispatch} from "react-redux";
 
 
 const CityCards = ({data}: { data: any }) => {
 
     const dispatch = useDispatch<any>()
+
     const deleteHandler = () => {
         dispatch(deleteCity({id: data.id}))
     }
+    const handleUpdate = () => {
+        // @ts-ignore
+        dispatch(updateCityCard(data.id))
 
+    }
     return (
         <div>
             {data ? <div
-                className="my-4  bg-cyan-900 min-w-full min-w-[200] rounded-3xl border-orange-200 border-4 ">
+                className="my-4  bg-cyan-900 min-w-full rounded-3xl border-orange-200 border-4 ">
                 <div className="CityCards flex flex-row relative min-h-[200px]">
                     <div className="weather flex flex-col justify-between">
                         <div className="flex bg-fuchsia-200 rounded-[20px] z-20  card  flex-row justify-center items-center">
@@ -46,9 +51,9 @@ const CityCards = ({data}: { data: any }) => {
                                 <h3>Wind: {data?.wind.speed.toFixed()}М/с </h3>
                             </div>
                         </div>
-                        <div className="flex flex-row mt-4 justify-around">
-                            <button onClick={deleteHandler} className="bg-white mb-0 ">Delete</button>
-                            <button className="bg-white mb-0  ">Update</button>
+                        <div className="flex flex-row my-4  justify-around">
+                            <button onClick={deleteHandler} className="bg-white mb-0 px-2 rounded-full hover:bg-red-500 hover:text-white">Delete</button>
+                            <button onClick={handleUpdate} className="bg-white mb-0 rounded-full px-2 hover:bg-blue-700 hover:text-white">Update</button>
                         </div>
                     </div>
                 </div>
