@@ -12,6 +12,10 @@ export const App = () => {
     // @ts-ignore
     const inValidCity = useSelector((state) => state.error)
     const [inputCityQuery, setInputCityQuery] = useState('')
+    const [errorConnect, setErrorConect] = useState('')
+    console.log(inValidCity)
+
+
 
 
 
@@ -34,6 +38,7 @@ export const App = () => {
 
 
     // @ts-ignore
+    // @ts-ignore
     return (
         <div className="w-full justify-center app">
             <div className="city-input flex justify-center w-full px-2 pt-20">
@@ -53,7 +58,7 @@ export const App = () => {
                 </div>
 
             </div>
-            <div className="flex justify-center text-red-500 my-8"><p>{inValidCity ? inValidCity.toUpperCase() + `, Try again` : ''}</p></div>
+            <div className="flex justify-center text-red-500 my-8"><p>{inValidCity ? inValidCity.toUpperCase()  : ''}</p></div>
             <div className="container flex-wrap flex flex-row justify-around ">
                 {/*// @ts-ignore*/}
                 {weather?.map((elem) => <CityCards key={elem.id} data={elem}/>)}

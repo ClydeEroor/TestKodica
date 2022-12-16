@@ -24,7 +24,6 @@ const CityCards = ({data}: { data: any }) => {
                     <div className="weather flex flex-col justify-between">
                         <div className="flex bg-fuchsia-200 rounded-[20px] z-20  card  flex-row justify-center items-center">
                             <div>
-                                {/*// @ts-ignore*/}
                                 <div><img className="max-w-[80px]" src={`https://openweathermap.org/img/wn/${data?.weather[0].icon}@2x.png`}
                                           alt={data.id}/></div>
                             </div>

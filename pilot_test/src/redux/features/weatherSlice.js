@@ -1,13 +1,12 @@
-import {createAsyncThunk, createSlice, current} from '@reduxjs/toolkit'
+import {createAsyncThunk, createSlice} from '@reduxjs/toolkit'
 import axios from "axios";
 
 const initialState = {
     weather: [],
-    error:"",
+    error: "",
 }
 //https://api.openweathermap.org/data/2.5/forecast?id=524901&q=Kyiv&units=metric&appid=f473cb3c4a2865e315ac74ebbd07ab80
 
-// @ts-ignore
 export const getCityWeather = createAsyncThunk('/getCityWeather', async (inputCityQuery) => {
     try {
         let queryString
@@ -16,10 +15,14 @@ export const getCityWeather = createAsyncThunk('/getCityWeather', async (inputCi
         }
 
         let url = `https://api.openweathermap.org/data/2.5/weather?units=metric&q=${queryString}&appid=f473cb3c4a2865e315ac74ebbd07ab80`
-        const { data, status} = await axios.get(url)
+        const {data} = await axios.get(url)
         return data
     } catch (error) {
-        throw error.response.data
+        if (error?.response?.data) {
+            throw error.response.data
+        } else {
+            throw error
+        }
     }
 })
 export const updateCityCard = createAsyncThunk('/updateCityCard', async (cityId) => {
@@ -30,23 +33,19 @@ export const updateCityCard = createAsyncThunk('/updateCityCard', async (cityId)
         }
         //
         let url = `https://api.openweathermap.org/data/2.5/weather?units=metric&id=${cityId}&appid=f473cb3c4a2865e315ac74ebbd07ab80`
-        const {data, status} = await axios.get(url)
-        console.log(data)
+        const {data} = await axios.get(url)
         return data
-    //     703448 kiev
-    //     2643743 London
 
     } catch (error) {
         console.log(error)
     }
 })
 
-// @ts-ignore
 export const CityWeather = createSlice({
         name: 'weather',
         initialState,
         reducers: {
-            deleteCity: (state,action) => {
+            deleteCity: (state, action) => {
                 state.weather = state.weather.filter(elem => elem.id !== action.payload.id)
             },
 
@@ -57,10 +56,10 @@ export const CityWeather = createSlice({
             },
             [getCityWeather.fulfilled]: (state, action) => {
                 state.loading = false
-                state.weather = [...state.weather,action.payload]
+                state.weather = [...state.weather, action.payload]
                 state.error = ''
             },
-                [getCityWeather.rejected]: (state,action) => {
+            [getCityWeather.rejected]: (state, action) => {
                 state.loading = false
                 state.error = action.error.message
             },
@@ -70,24 +69,17 @@ export const CityWeather = createSlice({
             [updateCityCard.fulfilled]: (state, action) => {
                 state.loading = false
                 state.updateWeather = action.payload
-
-                console.log(current(state))
-                console.log("_______---------___________---------______")
-                state.weather.findIndex((element,index,array) => {
+                state.weather.findIndex((element, index) => {
                     if (element.id === action.payload.id) {
-                         state.weather[index] = action.payload
-
+                        state.weather[index] = action.payload
                         return true
                     }
-
                 })
-
             },
             [updateCityCard.rejected]: (state) => {
                 state.loading = false
-                // state.error = action.error.message
             },
         }
     }
 )
-export const { deleteCity } = CityWeather.actions
+export const {deleteCity} = CityWeather.actions
