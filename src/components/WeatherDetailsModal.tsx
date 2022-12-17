@@ -42,9 +42,7 @@ function WeatherDetailsModal({ cityId, isOpen, onClose }: ModalProps) {
           return (
             <div
               key={elem.dt}
-              className={`flex flex-wrap justify-center mx-2 ${getMarginString(
-                Number(elem.main.temp.toFixed())
-              )}  px-6 py-2 bg-cyan-400 `}
+              className={`flex flex-wrap justify-center mx-2 px-6 py-2 bg-cyan-400`}
               style={{
                 marginTop: getMarginString(Number(elem.main.temp.toFixed()))
               }}>
