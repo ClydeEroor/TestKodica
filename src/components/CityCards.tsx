@@ -1,21 +1,21 @@
 import React, { useState } from 'react';
 import 'react-toastify/dist/ReactToastify.css';
 import { deleteCity, updateCityCard } from '../redux/features/weatherSlice';
-import { useDispatch } from 'react-redux';
 import WeatherDetailsModal from './WeatherDetailsModal';
+import { useAppDispatch } from '../redux/store';
+import { CityWeatherData } from '../utils/constants';
 
-const CityCards = ({ data }: { data: any }) => {
+const CityCards = ({ data }: { data: CityWeatherData }) => {
   const [isOpenModal, setIsOpenModal] = useState(false);
-
-  const dispatch = useDispatch<any>();
-
+  const dispatch = useAppDispatch();
   const deleteHandler = () => {
     dispatch(deleteCity({ id: data.id }));
   };
-  const handleUpdate = () => {
-    // @ts-expect-error
-    dispatch(updateCityCard(data.id));
+
+  const handleUpdate = async () => {
+    await dispatch(updateCityCard(data.id));
   };
+
   return (
     <div>
       {data ? (
@@ -28,7 +28,7 @@ const CityCards = ({ data }: { data: any }) => {
                     <img
                       className="max-w-[80px]"
                       src={`https://openweathermap.org/img/wn/${data?.weather[0].icon}@2x.png`}
-                      alt={data.id}
+                      alt={data?.weather[0].description}
                     />
                   </div>
                 </div>

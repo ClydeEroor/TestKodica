@@ -11,6 +11,7 @@ import {
 } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 import { CityWeather } from './features/weatherSlice';
+import { useDispatch } from 'react-redux';
 
 const persistConfig = {
   key: 'root',
@@ -27,5 +28,8 @@ const store = configureStore({
       }
     })
 });
+export type RootState = ReturnType<typeof store.getState>;
+export type AppDispatch = typeof store.dispatch;
+export const useAppDispatch: () => AppDispatch = useDispatch;
 export const persistor = persistStore(store);
 export default store;

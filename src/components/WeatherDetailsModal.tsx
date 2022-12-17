@@ -22,11 +22,7 @@ function WeatherDetailsModal({ cityId, isOpen, onClose }: ModalProps) {
   const [data, setData] = useState<Data | null>(null);
 
   const getMarginString = (temp: number) => {
-    if (temp > 0) {
-      return -temp * 22;
-    } else {
-      return Math.abs(temp) * 22;
-    }
+    return -temp * 22;
   };
 
   useEffect(() => {
@@ -36,7 +32,7 @@ function WeatherDetailsModal({ cityId, isOpen, onClose }: ModalProps) {
       );
       setData(res.data);
     };
-    exec();
+    void exec();
   }, [cityId]);
 
   return (

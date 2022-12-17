@@ -1,30 +1,28 @@
 import React, { useState } from 'react';
 import './App.css';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { getCityWeather } from './redux/features/weatherSlice';
 import CityCards from './components/CityCards';
+import { RootState, useAppDispatch } from './redux/store';
 
 export const App = () => {
-  const dispatch = useDispatch<any>();
-  // @ts-expect-error
-  const weather = useSelector((state) => state.weather);
-  // @ts-expect-error ad
-  const inValidCity = useSelector((state) => state.error);
+  const dispatch = useAppDispatch();
+  const weather = useSelector((state: RootState) => state.weather);
+  const inValidCity = useSelector((state: RootState) => state.error);
   const [inputCityQuery, setInputCityQuery] = useState('');
 
   const handleChange = (event: { target: { value: React.SetStateAction<string> } }): void => {
     setInputCityQuery(event.target.value);
   };
 
-  const handleKeyDown = (event: { key: string }) => {
+  const handleKeyDown = async (event: { key: string }) => {
     if (event.key === 'Enter') {
-      handleData();
+      await handleData();
     }
   };
 
-  const handleData = () => {
-    const test = dispatch(getCityWeather(inputCityQuery));
-    console.log(test);
+  const handleData = async () => {
+    await dispatch(getCityWeather(inputCityQuery));
     setInputCityQuery('');
   };
 
@@ -53,7 +51,7 @@ export const App = () => {
         <p>{inValidCity ? inValidCity.toUpperCase() : ''}</p>
       </div>
       <div className="container flex-wrap flex flex-row justify-around ">
-        {weather?.map((elem: any) => (
+        {weather?.map((elem) => (
           <CityCards key={elem.id} data={elem} />
         ))}
       </div>
