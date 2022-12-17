@@ -1,34 +1,31 @@
-import React, { useState } from "react";
-import "./App.css";
-import { useDispatch, useSelector } from "react-redux";
-import { getCityWeather } from "./redux/features/weatherSlice";
-import CityCards from "./components/CityCards";
+import React, { useState } from 'react';
+import './App.css';
+import { useDispatch, useSelector } from 'react-redux';
+import { getCityWeather } from './redux/features/weatherSlice';
+import CityCards from './components/CityCards';
 
 export const App = () => {
   const dispatch = useDispatch<any>();
-  // @ts-ignore
+  // @ts-expect-error
   const weather = useSelector((state) => state.weather);
-  // @ts-ignore ad
+  // @ts-expect-error ad
   const inValidCity = useSelector((state) => state.error);
-  const [inputCityQuery, setInputCityQuery] = useState("");
+  const [inputCityQuery, setInputCityQuery] = useState('');
 
-  const handleChange = (event: {
-    target: { value: React.SetStateAction<string> };
-  }) => {
+  const handleChange = (event: { target: { value: React.SetStateAction<string> } }): void => {
     setInputCityQuery(event.target.value);
   };
 
   const handleKeyDown = (event: { key: string }) => {
-    if (event.key === "Enter") {
+    if (event.key === 'Enter') {
       handleData();
     }
   };
 
   const handleData = () => {
-    // @ts-ignore
     const test = dispatch(getCityWeather(inputCityQuery));
     console.log(test);
-    setInputCityQuery("");
+    setInputCityQuery('');
   };
 
   return (
@@ -47,14 +44,13 @@ export const App = () => {
           <button
             className="rounded-full flex items-center justify-center w-24 h-[40px] text-[14px] text-black bg-cyan-400 hover:text-cyan-400 hover:bg-white absolute"
             onClick={handleData}
-            type="submit"
-          >
+            type="submit">
             add
           </button>
         </div>
       </div>
       <div className="flex justify-center text-red-500 my-8">
-        <p>{inValidCity ? inValidCity.toUpperCase() : ""}</p>
+        <p>{inValidCity ? inValidCity.toUpperCase() : ''}</p>
       </div>
       <div className="container flex-wrap flex flex-row justify-around ">
         {weather?.map((elem: any) => (

@@ -1,8 +1,8 @@
-import React, { useState } from "react";
-import "react-toastify/dist/ReactToastify.css";
-import { deleteCity, updateCityCard } from "../redux/features/weatherSlice";
-import { useDispatch } from "react-redux";
-import WeatherDetailsModal from "./WeatherDetailsModal";
+import React, { useState } from 'react';
+import 'react-toastify/dist/ReactToastify.css';
+import { deleteCity, updateCityCard } from '../redux/features/weatherSlice';
+import { useDispatch } from 'react-redux';
+import WeatherDetailsModal from './WeatherDetailsModal';
 
 const CityCards = ({ data }: { data: any }) => {
   const [isOpenModal, setIsOpenModal] = useState(false);
@@ -13,7 +13,7 @@ const CityCards = ({ data }: { data: any }) => {
     dispatch(deleteCity({ id: data.id }));
   };
   const handleUpdate = () => {
-    // @ts-ignore
+    // @ts-expect-error
     dispatch(updateCityCard(data.id));
   };
   return (
@@ -35,9 +35,7 @@ const CityCards = ({ data }: { data: any }) => {
                 <div className="City pr-5">
                   <h1 className="text-2xl">{data?.name}</h1>
 
-                  <h2 className="text-white">
-                    {data?.main?.temp?.toFixed()} ℃
-                  </h2>
+                  <h2 className="text-white">{data?.main?.temp?.toFixed()} ℃</h2>
                 </div>
               </div>
               <div className="mt-4 flex flex-col items-center text-white">
@@ -60,28 +58,25 @@ const CityCards = ({ data }: { data: any }) => {
               <div className="flex flex-row my-4  justify-around">
                 <button
                   onClick={deleteHandler}
-                  className="bg-white mb-0 px-2 rounded-full hover:bg-red-500 hover:text-white"
-                >
+                  className="bg-white mb-0 px-2 rounded-full hover:bg-red-500 hover:text-white">
                   Delete
                 </button>
                 <button
                   onClick={handleUpdate}
-                  className="bg-white mb-0 rounded-full px-2 hover:bg-blue-700 hover:text-white"
-                >
+                  className="bg-white mb-0 rounded-full px-2 hover:bg-blue-700 hover:text-white">
                   Update
                 </button>
               </div>
               <button
                 onClick={() => setIsOpenModal(true)}
-                className="bg-yellow-300 mb-0 rounded-full px-2 m-4 hover:bg-blue-700 hover:text-white"
-              >
+                className="bg-yellow-300 mb-0 rounded-full px-2 m-4 hover:bg-blue-700 hover:text-white">
                 Details
               </button>
             </div>
           </div>
         </div>
       ) : (
-        "введите данные"
+        'введите данные'
       )}
       <WeatherDetailsModal
         cityId={data.id}

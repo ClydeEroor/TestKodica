@@ -1,4 +1,4 @@
-import { configureStore } from "@reduxjs/toolkit";
+import { configureStore } from '@reduxjs/toolkit';
 import {
   persistStore,
   persistReducer,
@@ -7,15 +7,15 @@ import {
   PAUSE,
   PERSIST,
   PURGE,
-  REGISTER,
-} from "redux-persist";
-import storage from "redux-persist/lib/storage";
-import { CityWeather } from "./features/weatherSlice";
+  REGISTER
+} from 'redux-persist';
+import storage from 'redux-persist/lib/storage';
+import { CityWeather } from './features/weatherSlice';
 
 const persistConfig = {
-  key: "root",
+  key: 'root',
   storage,
-  blacklist: ["error"],
+  blacklist: ['error']
 };
 const persistedReducer = persistReducer(persistConfig, CityWeather.reducer);
 const store = configureStore({
@@ -23,9 +23,9 @@ const store = configureStore({
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
       serializableCheck: {
-        ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
-      },
-    }),
+        ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER]
+      }
+    })
 });
 export const persistor = persistStore(store);
 export default store;

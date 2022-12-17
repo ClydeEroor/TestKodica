@@ -1,22 +1,22 @@
-import Modal from "react-modal";
-import { useEffect, useState } from "react";
-import axios from "axios";
+import Modal from 'react-modal';
+import { useEffect, useState } from 'react';
+import axios from 'axios';
 
-Modal.setAppElement("#root");
+Modal.setAppElement('#root');
 
-export type ModalProps = {
+export interface ModalProps {
   cityId: number;
   isOpen: boolean;
   onClose: () => void;
-};
+}
 
-export type Data = {
+export interface Data {
   list: Array<{
     main: Record<string, number>;
     dt: number;
     dt_txt: string;
   }>;
-};
+}
 
 function WeatherDetailsModal({ cityId, isOpen, onClose }: ModalProps) {
   const [data, setData] = useState<Data | null>(null);
@@ -50,12 +50,9 @@ function WeatherDetailsModal({ cityId, isOpen, onClose }: ModalProps) {
                 Number(elem.main.temp.toFixed())
               )}  px-6 py-2 bg-cyan-400 `}
               style={{
-                marginTop: getMarginString(Number(elem.main.temp.toFixed())),
-              }}
-            >
-              <div className="mr-4">
-                {new Date(elem.dt_txt).toTimeString().slice(0, 5)}
-              </div>
+                marginTop: getMarginString(Number(elem.main.temp.toFixed()))
+              }}>
+              <div className="mr-4">{new Date(elem.dt_txt).toTimeString().slice(0, 5)}</div>
               <div>{elem.main.temp.toFixed()}℃</div>
             </div>
           );
