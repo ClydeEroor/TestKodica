@@ -1,0 +1,14 @@
+{
+  "files": {
+    "main.css": "/TestKodica/static/css/main.a5c7415a.css",
+    "main.js": "/TestKodica/static/js/main.e6f39c4e.js",
+    "static/media/background.jpeg": "/TestKodica/static/media/background.f43b77816ec38220115a.jpeg",
+    "index.html": "/TestKodica/index.html",
+    "main.a5c7415a.css.map": "/TestKodica/static/css/main.a5c7415a.css.map",
+    "main.e6f39c4e.js.map": "/TestKodica/static/js/main.e6f39c4e.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.a5c7415a.css",
+    "static/js/main.e6f39c4e.js"
+  ]
+}
