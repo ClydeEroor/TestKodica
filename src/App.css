@@ -1,23 +1,26 @@
 @import url("https://fonts.cdnfonts.com/css/outfit");
 
 * {
-  box-sizing: border-box;
-  padding: 0;
-  margin: 0;
-  font-family: "Outfit", sans-serif;
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+    font-family: "Outfit", sans-serif;
 }
+
 body {
-  position: relative;
-}
-.app {
-  top: 0;
-  background: url("../public/background.jpeg") no-repeat center right/cover;
-  height: 100vh;
+    position: relative;
+    background: url("../public/background.jpeg") no-repeat fixed center center;
+    min-height: 100%;
 }
 
 .container {
-  margin: 0 auto;
+    margin: 0 auto;
 }
+
 .card {
-  background-color: coral;
+    background-color: coral;
+}
+
+.ReactModal__Content {
+    background-image: linear-gradient(360deg, blue, white, red) !important;
 }

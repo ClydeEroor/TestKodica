@@ -40,7 +40,7 @@ export const App = () => {
 
         <div className="relative right-24">
           <button
-            className="rounded-full flex items-center justify-center w-24 h-[40px] text-[14px] text-black bg-cyan-400 hover:text-cyan-400 hover:bg-white absolute"
+            className="rounded-full flex items-center justify-center w-24 h-[40px] text-[14px] text-black bg-amber-300 hover:text-cyan-400 hover:bg-white absolute"
             onClick={handleData}
             type="submit">
             add

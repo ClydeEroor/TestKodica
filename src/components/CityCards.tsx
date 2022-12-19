@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import 'react-toastify/dist/ReactToastify.css';
 import { deleteCity, updateCityCard } from '../redux/features/weatherSlice';
 import WeatherDetailsModal from './WeatherDetailsModal';
 import { useAppDispatch } from '../redux/store';
@@ -18,9 +17,9 @@ const CityCards = ({ data }: { data: CityWeatherData }) => {
 
   return (
     <div>
-      <div className="my-4  bg-cyan-900 min-w-full rounded-3xl border-orange-200 border-4 ">
-        <div className="CityCards flex flex-row relative min-h-[200px]">
-          <div className="weather flex flex-col justify-between">
+      <div className="my-4  bg-cyan-900 rounded-3xl min-h-50 min-w-[200px] mx-5 border-orange-200 border-4 sm:flex-col">
+        <div className="CityCards flex flex-row justify-center ">
+          <div className="weather flex flex-col justify-between w-full">
             <div className="flex bg-fuchsia-200 rounded-[20px] card  flex-row justify-center items-center">
               <div>
                 <div>
@@ -68,7 +67,7 @@ const CityCards = ({ data }: { data: CityWeatherData }) => {
             </div>
             <button
               onClick={() => setIsOpenModal(true)}
-              className="bg-yellow-300 mb-0 rounded-full px-2 m-4 hover:bg-blue-700 hover:text-white">
+              className="bg-yellow-300 mb-0 rounded-full p-2 hover:bg-green-400 hover:text-white">
               Details
             </button>
           </div>
